@@ -472,6 +472,22 @@ var CONFIG = {
   secoes.forEach(function(s){ io.observe(s); });
 })();
 
+/* ---------- fichas do acervo (placeholders honestos) ---------- */
+/* antes do observador de revelação: elemento criado depois não seria observado */
+(function obras(){
+  var caixa = document.getElementById("obras");
+  var html = "";
+  for (var i = 0; i < 4; i++){
+    html += '<button class="obra rv" style="--i:' + i + '" data-n="' + (i+1) + '"' +
+      ' aria-label="Abrir a ficha da peça ' + (i+1) + ' — acervo pendente">' +
+      '<div class="obra-foto"><span>[aguardando acervo]</span></div>' +
+      '<p class="ficha">região · estilo · sessões</p>' +
+      '<p class="ficha ficha-linha">— o que a peça era pra pessoa, numa linha.</p>' +
+      '</button>';
+  }
+  caixa.innerHTML = html;
+})();
+
 /* ---------- revelação: uma vez só + serifa assenta ---------- */
 (function revela(){
   var alvos = document.querySelectorAll(".rv, h1, h2");
@@ -487,21 +503,6 @@ var CONFIG = {
     });
   }, { rootMargin: "0px 0px -12% 0px" });
   alvos.forEach(function(el){ io.observe(el); });
-})();
-
-/* ---------- fichas do acervo (placeholders honestos) ---------- */
-(function obras(){
-  var caixa = document.getElementById("obras");
-  var html = "";
-  for (var i = 0; i < 4; i++){
-    html += '<button class="obra rv" style="--i:' + i + '" data-n="' + (i+1) + '"' +
-      ' aria-label="Abrir a ficha da peça ' + (i+1) + ' — acervo pendente">' +
-      '<div class="obra-foto"><span>[aguardando acervo]</span></div>' +
-      '<p class="ficha">região · estilo · sessões</p>' +
-      '<p class="ficha ficha-linha">— o que a peça era pra pessoa, numa linha.</p>' +
-      '</button>';
-  }
-  caixa.innerHTML = html;
 })();
 
 /* ---------- peça aberta, com View Transitions se houver ---------- */
